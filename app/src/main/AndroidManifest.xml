@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.loric.aacharya">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_aacharya2"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo_aacharya2"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".FacultiesListActivity"></activity>
+        <activity android:name=".DeveloperContact" />
+        <activity android:name=".ContactUsActivity" />
+        <activity android:name=".CourseOfferedActivity" />
+        <activity android:name=".AchievementActivity" />
+        <activity android:name=".StudentsDashboard.PersonalInfoActivity" />
+        <activity android:name=".StudentsDashboard.ComplaintBox" />
+        <activity android:name=".FacultyDashboard.DashboardFaculty" />
+        <activity android:name=".Account.LoginActivity" />
+        <activity android:name=".ScanQrCodeActivity" />
+        <activity android:name=".StudentsDashboard.FChatActivity" />
+        <activity android:name=".EventGallery.PhotoFullScreenActivity" />
+        <activity android:name=".EventGallery.EventGalleryActivity" />
+        <activity android:name=".StudentsDashboard.StudentDashboard" />
+        <activity android:name=".DashboardPublic" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

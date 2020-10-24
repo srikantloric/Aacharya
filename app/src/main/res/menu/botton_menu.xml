@@ -1,0 +1,21 @@
+<!-- bottom_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_ic"
+        android:title="Home" />
+    <item
+        android:id="@+id/attendance"
+        android:icon="@drawable/attendance_icon"
+        android:title="Attendance"
+        />
+    <item
+        android:id="@+id/f_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="Faculty Chat"
+       />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+</menu>

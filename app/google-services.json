@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "230001342599",
+    "firebase_url": "https://aacharya-12699.firebaseio.com",
+    "project_id": "aacharya-12699",
+    "storage_bucket": "aacharya-12699.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230001342599:android:1f717f3fcf05750248a022",
+        "android_client_info": {
+          "package_name": "com.example.loric.aacharya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230001342599-4ihvd9p6i29i3k6hn59n5kvhu717pohe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC30M_JhUYZvOD8-PrKZGIGHLTWxd7sWRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230001342599-4ihvd9p6i29i3k6hn59n5kvhu717pohe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
