@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#fff"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/teacher_profile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/teacher_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Fokan Singh"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/teacher_profile"
+                app:layout_constraintTop_toTopOf="@+id/teacher_profile" />
+
+            <TextView
+                android:id="@+id/teacher_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="( English )"
+                android:textSize="14sp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/teacher_profile"
+                app:layout_constraintEnd_toEndOf="@+id/teacher_name"
+                app:layout_constraintStart_toStartOf="@+id/teacher_name"
+                app:layout_constraintTop_toBottomOf="@+id/teacher_name" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="About class"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="@+id/meetingTiming"
+                app:layout_constraintTop_toBottomOf="@+id/meetingTiming" />
+
+            <TextView
+                android:id="@+id/about_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView50"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <EditText
+                android:id="@+id/google_meet_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/stroke_gray_bg"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="6dp"
+                android:text="Google Meet Code : 4XLJD687JS8DNSU "
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/about_class"
+                app:layout_constraintStart_toStartOf="@+id/about_class"
+                app:layout_constraintTop_toBottomOf="@+id/about_class" />
+
+            <TextView
+                android:id="@+id/meetingTiming"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Scheduled at 05:30 pm Wednesday, 24-05-2020"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/join_now_btn"
+                app:layout_constraintStart_toStartOf="@+id/teacher_profile"
+                app:layout_constraintTop_toBottomOf="@+id/teacher_profile" />
+
+            <Button
+                android:id="@+id/join_now_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorPrimaryDark"
+                android:foreground="?selectableItemBackground"
+                android:text="Join Now"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toTopOf="@+id/meetingTiming"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

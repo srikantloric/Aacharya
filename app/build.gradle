@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
 
@@ -64,4 +69,9 @@ dependencies {
 
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+    implementation   'com.applandeo:material-calendar-view:1.4.0'
+
+
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+
 }

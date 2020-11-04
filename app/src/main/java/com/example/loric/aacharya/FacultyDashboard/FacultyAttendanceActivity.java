@@ -1,17 +1,15 @@
-package com.example.loric.aacharya.Fragments;
+package com.example.loric.aacharya.FacultyDashboard;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loric.aacharya.R;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -34,8 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
-public class AttendanceFrag extends Fragment {
+public class FacultyAttendanceActivity extends AppCompatActivity {
 
     private CompactCalendarView compactCalendarView;
     private TextView dateView, presentedTv, totalClassesTv, absentedTv;
@@ -52,35 +49,27 @@ public class AttendanceFrag extends Fragment {
     private SimpleArcLoader loader;
     private Dialog dialog;
 
-
-    public AttendanceFrag() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_attendance, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_faculty_attendance);
 
-        dialog = new Dialog(getContext());
+        dialog = new Dialog(this);
         dialog.setContentView(R.layout.loading_dialog_layout);
         dialog.setCancelable(false);
         dialog.show();
 
-
-        compactCalendarView = view.findViewById(R.id.compactcalendar_view);
+        compactCalendarView = findViewById(R.id.compactcalendar_view);
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
-        dateView = view.findViewById(R.id.year_date);
-        calLeftBtn = view.findViewById(R.id.calander_left_btn);
-        calRightBtn = view.findViewById(R.id.calender_right_btn);
-        loader = view.findViewById(R.id.loader);
-        pieChart = view.findViewById(R.id.piechart);
-        presentedTv = view.findViewById(R.id.presented_tv);
-        totalClassesTv = view.findViewById(R.id.total_classes);
-        absentedTv = view.findViewById(R.id.total_absented_days);
+        dateView = findViewById(R.id.year_date);
+        calLeftBtn = findViewById(R.id.calander_left_btn);
+        calRightBtn = findViewById(R.id.calender_right_btn);
+        loader = findViewById(R.id.loader);
+        pieChart = findViewById(R.id.piechart);
+        presentedTv = findViewById(R.id.presented_tv);
+        totalClassesTv = findViewById(R.id.total_classes);
+        absentedTv = findViewById(R.id.total_absented_days);
         compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
         compactCalendarView.shouldSelectFirstDayOfMonthOnScroll(false);
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -113,8 +102,6 @@ public class AttendanceFrag extends Fragment {
 
         getAttendanceFromServer();
 
-
-        return view;
     }
 
 
@@ -169,19 +156,20 @@ public class AttendanceFrag extends Fragment {
                                                 pieChart.startAnimation();
 
                                             } else {
-                                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(FacultyAttendanceActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                             dialog.dismiss();
                                         }
                                     });
                         } else {
                             dialog.dismiss();
-                            Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FacultyAttendanceActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
     }
+
 
 
 }

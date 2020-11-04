@@ -58,7 +58,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            Glide.with(PersonalInfoActivity.this).load(task.getResult().getString("userProfile"));
+                            Glide.with(PersonalInfoActivity.this).load(task.getResult().getString("userProfile")).into(circleImageView);
 
                             if (task.getResult().getString("userName") != null) {
                                 userName.setText(task.getResult().getString("userName"));
@@ -102,7 +102,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         userFathersName = findViewById(R.id.fathersname_tv);
         userAddress = findViewById(R.id.address_tv);
         userContactNo = findViewById(R.id.contact_no_tv);
-        userCourseDetail = findViewById(R.id.course_detail_tv);
+        userCourseDetail = findViewById(R.id.course_fee_detail_tv);
         backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

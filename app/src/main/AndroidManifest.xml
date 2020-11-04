@@ -13,7 +13,14 @@
         android:roundIcon="@drawable/logo_aacharya2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FacultiesListActivity"></activity>
+        <activity android:name=".StudentsDashboard.StudentsNotesActivity"></activity>
+        <activity android:name=".StudentsDashboard.JobVacanciesActivity" />
+        <activity android:name=".StudentsDashboard.WeeklyTestActivity" />
+        <activity android:name=".StudentsDashboard.OnlineClassStudentActivity" />
+        <activity android:name=".FacultyDashboard.FacultyAttendanceActivity" />
+        <activity android:name=".FacultyDashboard.OnlineClassFaculty" />
+        <activity android:name=".FeeDetails" />
+        <activity android:name=".FacultiesListActivity" />
         <activity android:name=".DeveloperContact" />
         <activity android:name=".ContactUsActivity" />
         <activity android:name=".CourseOfferedActivity" />

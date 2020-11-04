@@ -1,10 +1,12 @@
 package com.example.loric.aacharya.Fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +19,32 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.loric.aacharya.FeeDetails;
 import com.example.loric.aacharya.R;
 import com.example.loric.aacharya.ScanQrCodeActivity;
 import com.example.loric.aacharya.StudentsDashboard.ComplaintBox;
+import com.example.loric.aacharya.StudentsDashboard.JobVacanciesActivity;
+import com.example.loric.aacharya.StudentsDashboard.OnlineClassStudentActivity;
 import com.example.loric.aacharya.StudentsDashboard.PersonalInfoActivity;
+import com.example.loric.aacharya.StudentsDashboard.StudentsNotesActivity;
+import com.example.loric.aacharya.StudentsDashboard.WeeklyTestActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.loric.aacharya.DbQueries.isQrScannedAndMatched;
 
 public class HomeFrag extends Fragment {
 
     Button scanBtn;
-    private CardView complainBoxBtn, personalInfoBtn;
+    private CardView complainBoxBtn, personalInfoBtn, feeDetail, onlineClass, weeklyTest, jobVacancy, studentNotes;
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
@@ -56,7 +70,6 @@ public class HomeFrag extends Fragment {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             QrCodeServer = task.getResult().getString("qr_code");
-                            Log.d("joj", "onComplete: " + QrCodeServer);
                         } else {
                             Toast.makeText(getContext(), "Something went wrong.Please try again.", Toast.LENGTH_SHORT).show();
                         }
@@ -66,6 +79,52 @@ public class HomeFrag extends Fragment {
         scanBtn = view.findViewById(R.id.scan_btn);
         complainBoxBtn = view.findViewById(R.id.complain_box_btn);
         personalInfoBtn = view.findViewById(R.id.personal_info_btn);
+        feeDetail = view.findViewById(R.id.fee_detail);
+        onlineClass = view.findViewById(R.id.online_class_btn);
+        weeklyTest = view.findViewById(R.id.weekly_test);
+        jobVacancy = view.findViewById(R.id.job_vacancy);
+        studentNotes = view.findViewById(R.id.notes_student);
+
+        studentNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), StudentsNotesActivity.class);
+                startActivity(intent);
+            }
+        });
+        jobVacancy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), JobVacanciesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        weeklyTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), WeeklyTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        onlineClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OnlineClassStudentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        feeDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FeeDetails.class);
+                startActivity(intent);
+            }
+        });
+
 
         personalInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +146,9 @@ public class HomeFrag extends Fragment {
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (QrCodeServer==null){
+                if (QrCodeServer == null) {
                     Toast.makeText(getContext(), "Please Wait..Qr Processing", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Intent intent = new Intent(getContext(), ScanQrCodeActivity.class);
                     intent.putExtra("QR_SERVER", QrCodeServer);
                     startActivity(intent);
@@ -97,9 +156,61 @@ public class HomeFrag extends Fragment {
             }
         });
 
+        SharedPreferences sp = getContext().getSharedPreferences("com.example.loric.aacharya", Context.MODE_PRIVATE);
+        String savedDateTime = sp.getString("SavedDate", "");
+        if ("".equals(savedDateTime)) {
+            scanBtn.setEnabled(true);
+            scanBtn.setAlpha((float) 1);
+        } else {
+            String dateStringNow = DateFormat.format("MM/dd/yyyy", new Date((new Date()).getTime())).toString();
+            if (savedDateTime.equals(dateStringNow)) {
+                scanBtn.setEnabled(false);
+                scanBtn.setAlpha((float) 0.6);
+                scanBtn.setText("Attended Successfully");
+
+            } else {
+                scanBtn.setEnabled(true);
+                scanBtn.setAlpha((float) 1);
+            }
+        }
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0001);
         }
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Map<String, Object> attendance = new HashMap<>();
+        attendance.put("attendance_time", FieldValue.serverTimestamp());
+
+        if (isQrScannedAndMatched) {
+            firebaseFirestore.collection("USERS").document(firebaseAuth.getCurrentUser().getUid())
+                    .collection("MY_ATTENDANCE")
+                    .document()
+                    .set(attendance)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                String dateString = DateFormat.format("MM/dd/yyyy", new Date((new Date()).getTime())).toString();
+                                SharedPreferences sp = getContext().getSharedPreferences("com.example.loric.aacharya", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("SavedDate", dateString);
+                                editor.commit();
+                                scanBtn.setEnabled(false);
+                                scanBtn.setAlpha((float) 0.6);
+                                scanBtn.setText("Attended Successfully");
+                                Toast.makeText(getContext(), "Attendance Updated Successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Attendance Update Failed Please Scan again...", Toast.LENGTH_SHORT).show();
+                            }
+                            isQrScannedAndMatched = false;
+
+                        }
+                    });
+        }
+
     }
 }

@@ -3,23 +3,24 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="director_message">We do preparation for many exams SSC, BANK, RAILWAY, JSSC, POLYTECHNIC, I believe that every student has the potential to succeed in
-    competitive exams but a smart guidance is needed to try and achieve the goals."AACHARYA INSTITUTE" is providing best guidance to all our students.I am personally really happy that for the service of our
-    "Aacharya Institute".We always keep teachers who have passed a lot of exams themselves. Our institute has a track record of giving the highest results in GIRIDIH for the past several years.I myself welcome
-    all the students in the class.I promise to provide an excellent guidance to all of you which are beyond the reach of other institutions in the state.</string>
+    <string name="director_message">We make students prepare for many exams like SSC, BANK, RAILWAY, JSSC, POLYTECHNIC and many more , I believe that every student has the potential to get succeed in
+    competitive exams but a smart guidance is needed to try and achieve the goals. Our "AACHARYA INSTITUTE" is providing best guidance to all our students.I am really happy that by the service of our
+    "Aacharya Institute". We always keep teachers who have passed a lot of exams themselves. Our institute has a track record of giving the highest results in GIRIDIH for the past several years. I myself welcome
+    all the students in the class. I promise to provide an excellent guidance to all of you which are beyond the reach of other institutions in the state.</string>
 
     <string name="director_message_short">
-        We do preparation for many exams SSC, BANK, RAILWAY, JSSC, POLYTECHNIC, I believe that every student has the potential to succeed in
+        We make students prepare for many exams like SSC, BANK, RAILWAY, JSSC, POLYTECHNIC and many more , I believe that every student has the potential to succeed in
         competitive exams but a smart guidance is needed to try and achieve the goals...
     </string>
 
     <string name="director_message_hindi">
-     हमारे पास SSC, BANK, RAILWAY, JSSC, POLYTECHNIC की कई परीक्षाओं की तैयारी है, मेरा मानना ​​है कि प्रत्येक छात्र में सफल होने की क्षमता है
-    प्रतियोगी परीक्षा लेकिन लक्ष्यों को प्राप्त करने और प्राप्त करने के लिए एक स्मार्ट मार्गदर्शन की आवश्यकता है। "AACHARYA INSTITUTE" हमारे सभी छात्रों को सर्वोत्तम मार्गदर्शन प्रदान कर रहा है। मैं व्यक्तिगत रूप से वास्तव में खुश हूं कि हमारी सेवा के लिए
-    "आचार्य संस्थान"। हम हमेशा ऐसे शिक्षक रखते हैं जिन्होंने बहुत सारी परीक्षाएँ पास की हैं। हमारे संस्थान का पिछले कई वर्षों से GIRIDIH में उच्चतम परिणाम देने का एक ट्रैक रिकॉर्ड है। मैं खुद स्वागत करता हूं
+   हम छात्रों को SSC, BANK, RAILWAY, JSSC, POLYTECHNIC और कई और अधिक परीक्षाओं की तैयारी कराते हैं, मेरा मानना है कि प्रत्येक छात्र में सफल होने की क्षमता है
+    प्रतियोगी परीक्षा लेकिन लक्ष्यों को हासिल करने और हासिल करने के लिए एक स्मार्ट मार्गदर्शन की आवश्यकता होती है। हमारा "AACHARYA INSTITUTE" हमारे सभी छात्रों को सर्वोत्तम मार्गदर्शन प्रदान कर रहा है। मैं वास्तव में खुश हूँ कि हमारी सेवा के द्वारा
+    "आचार्य संस्थान"। हम हमेशा ऐसे शिक्षक रखते हैं, जिन्होंने बहुत सारी परीक्षाएँ पास की हैं। हमारे संस्थान का पिछले कई वर्षों से GIRIDIH में उच्चतम परिणाम देने का ट्रैक रिकॉर्ड है। मैं खुद स्वागत करता हूं
     कक्षा में सभी छात्र। मैं आप सभी को एक उत्कृष्ट मार्गदर्शन प्रदान करने का वादा करता हूं जो राज्य में अन्य संस्थानों की पहुंच से परे हैं।
-
     </string>
+
+    <string name="Rs">\u20B9</string>
 
 
 </resources>

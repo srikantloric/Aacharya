@@ -258,10 +258,10 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
-
         drawerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                navigationView.setCheckedItem(R.id.nav_home);
                 if (drawerLayout.isDrawerVisible(GravityCompat.START))
                     drawerLayout.closeDrawer(GravityCompat.START);
                 else drawerLayout.openDrawer(GravityCompat.START);
@@ -275,8 +275,31 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_login:
+                Intent intent = new Intent(DashboardPublic.this,LoginActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
             case R.id.nav_home:
-                Toast.makeText(this, "Home Btn Clicked", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_privacy:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://aacharyan.flycricket.io/privacy.html"));
+                startActivity(browserIntent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_rate:
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.about_developer:
+               Intent dev = new Intent(DashboardPublic.this,DeveloperContact.class);
+               startActivity(dev);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }

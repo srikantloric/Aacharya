@@ -16,13 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/l_one"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_backarraow"></ImageView>
-
         <TextView
             android:id="@+id/back_btn"
             android:layout_width="match_parent"
@@ -53,6 +46,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewGraph"
@@ -184,6 +178,7 @@
                         android:weightSum="100">
 
                         <TextView
+                            android:id="@+id/total_classes"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="90"
@@ -223,6 +218,7 @@
                         android:weightSum="100">
 
                         <TextView
+                            android:id="@+id/presented_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="90"
@@ -262,6 +258,7 @@
                         android:weightSum="100">
 
                         <TextView
+                            android:id="@+id/total_absented_days"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="90"
@@ -285,25 +282,80 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Attendance Log"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp" />
+                android:layout_height="40dp"
+                app:cardElevation="2dp">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/calander_left_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_baseline_chevron_left_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/calender_right_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_baseline_chevron_right_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/year_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Month"
+                        android:textSize="20sp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/calender_right_btn"
+                        app:layout_constraintStart_toEndOf="@+id/calander_left_btn"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+            >
+
+
+            <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                android:id="@+id/compactcalendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:compactCalendarBackgroundColor="#FFFFFF"
+                app:compactCalendarCurrentDayBackgroundColor="#1686DF"
+                app:compactCalendarCurrentSelectedDayBackgroundColor="#4ABA0000"
+                app:compactCalendarMultiEventIndicatorColor="#fff"
+                app:compactCalendarTargetHeight="250dp"
+                app:compactCalendarTextColor="#000000"
+                app:compactCalendarTextSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </LinearLayout>
+
+
 
     </ScrollView>
 
