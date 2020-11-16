@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,7 +32,6 @@ public class StudentsNotesActivity extends AppCompatActivity {
     StudentNotesAdapter adapter;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    ListenerRegistration listenerRegistration;
     Dialog dialog;
     ImageView backBtn;
 
@@ -58,7 +56,7 @@ public class StudentsNotesActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        adapter = new StudentNotesAdapter(studentNotesModelList);
+        adapter = new StudentNotesAdapter(this,studentNotesModelList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -69,8 +67,7 @@ public class StudentsNotesActivity extends AppCompatActivity {
 
     private void getDataFromServer() {
 
-        String rs = getResources().getString(R.string.Rs);
-        listenerRegistration = firebaseFirestore.collection("BOOKS_NOTES")
+       firebaseFirestore.collection("BOOKS_NOTES")
                 .orderBy("time_stamp", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -84,21 +81,27 @@ public class StudentsNotesActivity extends AppCompatActivity {
                                     if (list.contains(firebaseAuth.getCurrentUser().getUid())) {
                                         studentNotesModelList.add(new StudentNotesModel(snapshot.getString("book_title"),
                                                 snapshot.getString("book_description"),
-                                                rs + " " + snapshot.getLong("book_price") + "/-",
+                                                 snapshot.getLong("book_price").toString(),
                                                 snapshot.getString("book_img"),
+                                                snapshot.getId(),
+                                                snapshot.getString("book_url"),
                                                 true));
                                     } else {
                                         studentNotesModelList.add(new StudentNotesModel(snapshot.getString("book_title"),
                                                 snapshot.getString("book_description"),
-                                                rs + " " + snapshot.getLong("book_price") + "/-",
+                                                 snapshot.getLong("book_price").toString(),
                                                 snapshot.getString("book_img"),
+                                                snapshot.getId(),
+                                                snapshot.getString("book_url"),
                                                 false));
                                     }
                                 } else {
                                     studentNotesModelList.add(new StudentNotesModel(snapshot.getString("book_title"),
                                             snapshot.getString("book_description"),
-                                            rs + " " + snapshot.getLong("book_price") + "/-",
+                                            snapshot.getLong("book_price").toString(),
                                             snapshot.getString("book_img"),
+                                            snapshot.getId(),
+                                            snapshot.getString("book_url"),
                                             false));
                                 }
 
@@ -111,12 +114,5 @@ public class StudentsNotesActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        listenerRegistration.remove();
     }
 }

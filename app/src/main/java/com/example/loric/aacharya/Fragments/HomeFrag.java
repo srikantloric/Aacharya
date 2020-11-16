@@ -20,10 +20,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.loric.aacharya.FeeDetails;
+import com.example.loric.aacharya.PDFViewerActivity;
 import com.example.loric.aacharya.R;
 import com.example.loric.aacharya.ScanQrCodeActivity;
 import com.example.loric.aacharya.StudentsDashboard.ComplaintBox;
-import com.example.loric.aacharya.StudentsDashboard.JobVacanciesActivity;
 import com.example.loric.aacharya.StudentsDashboard.OnlineClassStudentActivity;
 import com.example.loric.aacharya.StudentsDashboard.PersonalInfoActivity;
 import com.example.loric.aacharya.StudentsDashboard.StudentsNotesActivity;
@@ -44,11 +44,12 @@ import static com.example.loric.aacharya.DbQueries.isQrScannedAndMatched;
 public class HomeFrag extends Fragment {
 
     Button scanBtn;
-    private CardView complainBoxBtn, personalInfoBtn, feeDetail, onlineClass, weeklyTest, jobVacancy, studentNotes;
+    private CardView complainBoxBtn,resultBtn, personalInfoBtn, feeDetail, onlineClass, weeklyTest, jobVacancy, studentNotes,mathsFormulas,currentAffairs;
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     private String QrCodeServer;
+    private String formulaUrl,vacanciesUrl,currentAffairUrl,resultUrl;
 
     public HomeFrag() {
 
@@ -70,6 +71,24 @@ public class HomeFrag extends Fragment {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             QrCodeServer = task.getResult().getString("qr_code");
+                            vacanciesUrl = task.getResult().getString("maths_formula");
+
+                        } else {
+                            Toast.makeText(getContext(), "Something went wrong.Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        firebaseFirestore.collection("PDF_CENTER")
+                .document("PDF_DATA")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            formulaUrl = task.getResult().getString("maths_formulas_pdf");
+                            formulaUrl = task.getResult().getString("vacancies_pdf");
+                            currentAffairUrl = task.getResult().getString("current_affair_pdf");
+                            resultUrl = task.getResult().getString("result_pdf");
                         } else {
                             Toast.makeText(getContext(), "Something went wrong.Please try again.", Toast.LENGTH_SHORT).show();
                         }
@@ -84,6 +103,67 @@ public class HomeFrag extends Fragment {
         weeklyTest = view.findViewById(R.id.weekly_test);
         jobVacancy = view.findViewById(R.id.job_vacancy);
         studentNotes = view.findViewById(R.id.notes_student);
+        mathsFormulas = view.findViewById(R.id.mathsFormulaBtn);
+        resultBtn = view.findViewById(R.id.result_btn);
+        currentAffairs = view.findViewById(R.id.current_affairs);
+
+        resultBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!resultUrl.equals("")){
+                    Intent intent = new Intent(getContext(), PDFViewerActivity.class);
+                    intent.putExtra("BOOK_URL",resultUrl);
+                    intent.putExtra("HEADER_TITLE","Results");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Please Wait..", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        currentAffairs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!currentAffairUrl.equals("")){
+                    Intent intent = new Intent(getContext(), PDFViewerActivity.class);
+                    intent.putExtra("BOOK_URL",currentAffairUrl);
+                    intent.putExtra("HEADER_TITLE","Current Affairs");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Please Wait..", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        mathsFormulas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!formulaUrl.equals("")){
+                    Intent intent = new Intent(getContext(), PDFViewerActivity.class);
+                    intent.putExtra("BOOK_URL",formulaUrl);
+                    intent.putExtra("HEADER_TITLE","Maths Formulas");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Please Wait..", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        jobVacancy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!vacanciesUrl.equals("")){
+                    Intent intent = new Intent(getContext(), PDFViewerActivity.class);
+                    intent.putExtra("BOOK_URL",vacanciesUrl);
+                    intent.putExtra("HEADER_TITLE","Vacancies Details");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Please Wait..", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         studentNotes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,14 +172,6 @@ public class HomeFrag extends Fragment {
                 startActivity(intent);
             }
         });
-        jobVacancy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), JobVacanciesActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         weeklyTest.setOnClickListener(new View.OnClickListener() {
             @Override

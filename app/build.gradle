@@ -73,5 +73,11 @@ dependencies {
 
 
     implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+    implementation 'com.razorpay:checkout:1.5.16'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+  
 
 }

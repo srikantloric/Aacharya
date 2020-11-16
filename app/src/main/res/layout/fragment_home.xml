@@ -112,375 +112,446 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="3">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                CardElevation="5"
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
+                android:orientation="vertical"
+
+
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="3">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/result_icon"></ImageView>
-
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/result_btn"
+                        CardElevation="5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Results"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/result_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Results"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
 
 
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/notes_student"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/notes_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Notes"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/online_class_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/online_class_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Online Classes"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/notes_student"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="3">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/notes_icon"></ImageView>
-
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/complain_box_btn"
+                        CardElevation="5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Notes"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/complain_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Complain Box"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
 
 
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/weekly_test"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/test_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Weekly Tests"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/current_affairs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/current_affairs_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Current Affairs"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/online_class_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="3">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/online_class_icon"></ImageView>
-
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/job_vacancy"
+                        CardElevation="5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Online Classes"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/job_vacency_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Job Vacancies"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fee_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/fee_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Fee Details"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/personal_info_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/idcard_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Personal Info"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="3">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/complain_box_btn"
-                CardElevation="5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="3">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/complain_icon"></ImageView>
-
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mathsFormulaBtn"
+                        CardElevation="5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Complain Box"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/maths_formula_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:text="Maths Formulas"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
 
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/weekly_test"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/test_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:text="Weekly Tests"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
+            </LinearLayout>
 
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/current_affairs_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:text="Current Affairs"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="3">
-
-            <androidx.cardview.widget.CardView
-                CardElevation="5"
-                android:id="@+id/job_vacancy"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/job_vacency_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:text="Job Vacancies"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
-                </LinearLayout>
+        </RelativeLayout>
 
 
-            </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:id="@+id/fee_detail"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/fee_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:text="Fee Details"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/personal_info_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/idcard_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:text="Personal Info"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"></TextView>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

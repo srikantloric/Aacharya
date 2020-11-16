@@ -13,8 +13,9 @@
         android:roundIcon="@drawable/logo_aacharya2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudentsDashboard.StudentsNotesActivity"></activity>
-        <activity android:name=".StudentsDashboard.JobVacanciesActivity" />
+        <activity android:name=".PDFViewerActivity" />
+        <activity android:name=".StudentsDashboard.RecievePaymentActivity" />
+        <activity android:name=".StudentsDashboard.StudentsNotesActivity" />
         <activity android:name=".StudentsDashboard.WeeklyTestActivity" />
         <activity android:name=".StudentsDashboard.OnlineClassStudentActivity" />
         <activity android:name=".FacultyDashboard.FacultyAttendanceActivity" />
@@ -51,6 +52,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_8ARVWoFieTdo6V" />
     </application>
 
 </manifest>
