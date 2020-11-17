@@ -68,7 +68,7 @@ public class OnlineClassFaculty extends AppCompatActivity {
         backBtn = findViewById(R.id.back_btn);
 
         dateTv = findViewById(R.id.date_tv);
-        timeTv = findViewById(R.id.time_tv);
+        timeTv = findViewById(R.id.incoming_time_tv);
         recyclerView = findViewById(R.id.rv_online_class_faculty);
 
 

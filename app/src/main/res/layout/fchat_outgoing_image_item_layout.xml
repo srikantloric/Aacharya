@@ -5,21 +5,16 @@
     android:gravity="end"
     android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:id="@+id/outgoing_image_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/outgoing_msg_bg"
-        android:paddingLeft="10dp"
-        android:paddingTop="8dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="8dp"
-        android:text="OutGoing Message..... "
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp" />
+        android:src="@drawable/logo_aacharya">
+
+    </ImageView>
 
     <TextView
         android:id="@+id/outgoing_image_time"

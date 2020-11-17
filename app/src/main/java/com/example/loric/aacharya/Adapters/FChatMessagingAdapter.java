@@ -3,6 +3,7 @@ package com.example.loric.aacharya.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.loric.aacharya.Models.FChatMessageModel.INCOMING_IMAGE_LAYOUT;
 import static com.example.loric.aacharya.Models.FChatMessageModel.INCOMING_MSG_LAYOUT;
+import static com.example.loric.aacharya.Models.FChatMessageModel.OUTGOING_IMAGE_LAYOUT;
 import static com.example.loric.aacharya.Models.FChatMessageModel.OUTGOING_MSG_LAYOUT;
 
 public class FChatMessagingAdapter extends RecyclerView.Adapter {
@@ -33,6 +36,10 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
                 return INCOMING_MSG_LAYOUT;
             case 1:
                 return OUTGOING_MSG_LAYOUT;
+            case 2:
+                return INCOMING_IMAGE_LAYOUT;
+            case 3:
+                return OUTGOING_IMAGE_LAYOUT;
             default:
                 return -1;
         }
@@ -49,6 +56,12 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             case OUTGOING_MSG_LAYOUT:
                 View outgoing_msg = LayoutInflater.from(parent.getContext()).inflate(R.layout.fchat_outgoing_msg_item_layout, parent, false);
                 return new OutgoingMessageLayout(outgoing_msg);
+            case INCOMING_IMAGE_LAYOUT:
+                View incoming_image = LayoutInflater.from(parent.getContext()).inflate(R.layout.fchat_incoming_image_item_layout, parent, false);
+                return new OutgoingMessageLayout(incoming_image);
+            case OUTGOING_IMAGE_LAYOUT:
+                View outgoing_image = LayoutInflater.from(parent.getContext()).inflate(R.layout.fchat_outgoing_image_item_layout, parent, false);
+                return new OutgoingMessageLayout(outgoing_image);
             default:
                 return null;
 
@@ -65,6 +78,9 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             case OUTGOING_MSG_LAYOUT:
                 ((OutgoingMessageLayout) holder).setOutgoingData(fChatMessageModelList.get(position).getMessageText(), fChatMessageModelList.get(position).getDateTime());
                 break;
+            case INCOMING_IMAGE_LAYOUT:
+                ((IncomingImageLayout)holder)
+
             default:
                 return;
         }
@@ -81,8 +97,8 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
 
         public IncomingMessageLayout(@NonNull View itemView) {
             super(itemView);
-            messageIncoming = itemView.findViewById(R.id.incoming_msg_tv);
-            timestamp_incoming = itemView.findViewById(R.id.time_tv);
+            messageIncoming = itemView.findViewById(R.id.incoming_image_item);
+            timestamp_incoming = itemView.findViewById(R.id.incoming_time_tv);
         }
 
         private void setIncomingData(String message, Date timestamp) {
@@ -100,8 +116,8 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
 
         public OutgoingMessageLayout(@NonNull View itemView) {
             super(itemView);
-            messageOutgoing = itemView.findViewById(R.id.outgoing_msg_tv);
-            timestamp_outgoing = itemView.findViewById(R.id.time_tv_outgoing);
+            messageOutgoing = itemView.findViewById(R.id.outgoing_image_item);
+            timestamp_outgoing = itemView.findViewById(R.id.outgoing_image_time);
         }
 
         private void setOutgoingData(String message, Date timestamp) {
@@ -111,6 +127,34 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
 
                 timestamp_outgoing.setText(df.format(timestamp));
             }
+        }
+    }
+
+
+    class IncomingImageLayout extends RecyclerView.ViewHolder {
+
+        ImageView image;
+        TextView time;
+
+        public IncomingImageLayout(@NonNull View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.incoming_image_item);
+            time = itemView.findViewById(R.id.incoming_time_tv);
+        }
+        private void setImageData(String imageUrl,String date) {
+
+
+        }
+    }
+
+    class OutgoingImageLayout extends RecyclerView.ViewHolder {
+        ImageView image;
+        TextView time;
+
+        public OutgoingImageLayout(@NonNull View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.outgoing_image_item);
+            time = itemView.findViewById(R.id.outgoing_image_time);
         }
     }
 }

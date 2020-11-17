@@ -4,8 +4,10 @@ import java.util.Date;
 
 public class FChatMessageModel {
 
-    public static final int INCOMING_MSG_LAYOUT=0;
-    public static final int OUTGOING_MSG_LAYOUT=1;
+    public static final int INCOMING_MSG_LAYOUT = 0;
+    public static final int OUTGOING_MSG_LAYOUT = 1;
+    public static final int INCOMING_IMAGE_LAYOUT = 2;
+    public static final int OUTGOING_IMAGE_LAYOUT = 3;
 
     int viewType;
     private String messageText;
@@ -15,14 +17,6 @@ public class FChatMessageModel {
         this.viewType = viewType;
         this.messageText = messageText;
         this.dateTime = dateTime;
-    }
-
-    public static int getIncomingMsgLayout() {
-        return INCOMING_MSG_LAYOUT;
-    }
-
-    public static int getOutgoingMsgLayout() {
-        return OUTGOING_MSG_LAYOUT;
     }
 
     public int getViewType() {
