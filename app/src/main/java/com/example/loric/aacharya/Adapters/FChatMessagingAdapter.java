@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.loric.aacharya.Models.FChatMessageModel;
 import com.example.loric.aacharya.R;
 
@@ -58,10 +59,10 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
                 return new OutgoingMessageLayout(outgoing_msg);
             case INCOMING_IMAGE_LAYOUT:
                 View incoming_image = LayoutInflater.from(parent.getContext()).inflate(R.layout.fchat_incoming_image_item_layout, parent, false);
-                return new OutgoingMessageLayout(incoming_image);
+                return new IncomingImageLayout(incoming_image);
             case OUTGOING_IMAGE_LAYOUT:
                 View outgoing_image = LayoutInflater.from(parent.getContext()).inflate(R.layout.fchat_outgoing_image_item_layout, parent, false);
-                return new OutgoingMessageLayout(outgoing_image);
+                return new OutgoingImageLayout(outgoing_image);
             default:
                 return null;
 
@@ -79,8 +80,11 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
                 ((OutgoingMessageLayout) holder).setOutgoingData(fChatMessageModelList.get(position).getMessageText(), fChatMessageModelList.get(position).getDateTime());
                 break;
             case INCOMING_IMAGE_LAYOUT:
-                ((IncomingImageLayout)holder)
-
+                ((IncomingImageLayout) holder).setIncomingImageData(fChatMessageModelList.get(position).getMessageText(), fChatMessageModelList.get(position).getDateTime());
+                break;
+            case OUTGOING_IMAGE_LAYOUT:
+                ((OutgoingImageLayout) holder).setOutgoingImageData(fChatMessageModelList.get(position).getMessageText(), fChatMessageModelList.get(position).getDateTime());
+                break;
             default:
                 return;
         }
@@ -141,7 +145,14 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             image = itemView.findViewById(R.id.incoming_image_item);
             time = itemView.findViewById(R.id.incoming_time_tv);
         }
-        private void setImageData(String imageUrl,String date) {
+
+        private void setIncomingImageData(String imageUrl, Date date) {
+            Glide.with(itemView.getContext()).load(imageUrl).into(image);
+            SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+
+            if (date != null) {
+                time.setText(df.format(date));
+            }
 
 
         }
@@ -156,5 +167,15 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             image = itemView.findViewById(R.id.outgoing_image_item);
             time = itemView.findViewById(R.id.outgoing_image_time);
         }
+
+        private void setOutgoingImageData(String imageUrl, Date dateTime) {
+            Glide.with(itemView.getContext()).load(imageUrl).into(image);
+
+            SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+            if (dateTime != null) {
+                time.setText(df.format(dateTime));
+            }
+        }
+
     }
 }

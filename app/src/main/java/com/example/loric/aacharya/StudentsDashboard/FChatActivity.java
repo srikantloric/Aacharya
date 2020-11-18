@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.example.loric.aacharya.Models.FChatMessageModel;
 import com.example.loric.aacharya.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -104,7 +106,7 @@ public class FChatActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(messageEditText.getText())) {
                     Toast.makeText(FChatActivity.this, "Cannot sent empty text..", Toast.LENGTH_SHORT).show();
                 } else {
-                    sendMessage(messageEditText.getText().toString());
+                    sendMessage(messageEditText.getText().toString(), false);
                     messageEditText.setText("");
                 }
             }
@@ -121,12 +123,13 @@ public class FChatActivity extends AppCompatActivity {
         return finalNodeId;
     }
 
-    private void sendMessage(String messageEditText) {
+    private void sendMessage(String messageEditText, boolean isImage) {
         Map<String, Object> message = new HashMap<>();
         message.put("messageText", messageEditText);
         message.put("sender", firebaseAuth.getCurrentUser().getUid());
         message.put("receiver", USER_ID);
         message.put("sentAt", FieldValue.serverTimestamp());
+        message.put("isImage", isImage);
         firebaseFirestore.collection("MESSAGE")
                 .document(setChatNode(firebaseAuth.getCurrentUser().getUid(), USER_ID))
                 .collection("messages")
@@ -147,10 +150,19 @@ public class FChatActivity extends AppCompatActivity {
                         if (value.getDocuments() != null) {
                             fChatMessageModelList.clear();
                             for (DocumentSnapshot snapshot : value.getDocuments()) {
+
                                 if (snapshot.getString("sender").equals(firebaseAuth.getCurrentUser().getUid())) {
-                                    fChatMessageModelList.add(new FChatMessageModel(1, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    if (snapshot.getBoolean("isImage")) {
+                                        fChatMessageModelList.add(new FChatMessageModel(3, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    } else {
+                                        fChatMessageModelList.add(new FChatMessageModel(1, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    }
                                 } else {
-                                    fChatMessageModelList.add(new FChatMessageModel(0, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    if (snapshot.getBoolean("isImage")) {
+                                        fChatMessageModelList.add(new FChatMessageModel(2, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    } else {
+                                        fChatMessageModelList.add(new FChatMessageModel(0, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                    }
                                 }
                             }
                             adapter.notifyDataSetChanged();
@@ -235,19 +247,11 @@ public class FChatActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-//                                    while (!urlTask.isSuccessful());
-//                                    Uri downloadUrl = urlTask.getResult();
-//                                    firebaseDatabase = FirebaseDatabase.getInstance();
-//                                    fdm = firebaseDatabase.getReference().child("NewsData").push();
-//                                    Map<String,Object> taskMap = new HashMap<>();
-//                                    taskMap.put("title",title.getText().toString());
-//                                    taskMap.put("url",""+downloadUrl);
-//                                    taskMap.put("source",source.getText().toString());
-//                                    taskMap.put("date",date.getText().toString());
-//                                    taskMap.put("description",desc.getText().toString());
-//                                    fdm.updateChildren(taskMap);
-//                                    Toast.makeText(MainActivity.this,"Image Uploaded",Toast.LENGTH_LONG).show();
+                            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!urlTask.isSuccessful()) ;
+                            Uri downloadUrl = urlTask.getResult();
+                            Log.d("lol", "onSuccess: " + downloadUrl);
+                            sendMessage(downloadUrl.toString(), true);
 
                             uploadProgress.setVisibility(View.GONE);
                             selectImageDialog.dismiss();
