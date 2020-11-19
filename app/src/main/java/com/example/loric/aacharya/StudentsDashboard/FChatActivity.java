@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.loric.aacharya.Adapters.FChatMessagingAdapter;
+import com.example.loric.aacharya.ImageResizer;
 import com.example.loric.aacharya.Models.FChatMessageModel;
 import com.example.loric.aacharya.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,6 +44,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -229,37 +230,58 @@ public class FChatActivity extends AppCompatActivity {
         sendImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendImageFcn();
+                try {
+                    sendImageFcn();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
 
-    private void sendImageFcn() {
+    private void sendImageFcn() throws IOException {
         if (filePath != null) {
+
+            Bitmap fullsizeBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filePath);
+
+            Bitmap reducedBitmap = ImageResizer.reduceBitmapSize(fullsizeBitmap, 786432);
+
+
             sendImageBtn.setEnabled(false);
             sendImageBtn.setAlpha((float) 0.6);
             tapToSelectText.setText("Sending..");
             tapToSelectText.setVisibility(View.VISIBLE);
             String imageName = UUID.randomUUID().toString();
-            final StorageReference reference = mStorageRef.child("images/" + imageName);
-            reference.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!urlTask.isSuccessful()) ;
-                            Uri downloadUrl = urlTask.getResult();
-                            Log.d("lol", "onSuccess: " + downloadUrl);
-                            sendMessage(downloadUrl.toString(), true);
+            final StorageReference reference = mStorageRef.child("Chat_Image/" + imageName);
 
-                            uploadProgress.setVisibility(View.GONE);
-                            selectImageDialog.dismiss();
 
-                            Snackbar snackbar = Snackbar.make(parentLayout, "Success", Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                        }
-                    })
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            reducedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+            UploadTask uploadTask = reference.putBytes(bitmapdata);
+
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful()) ;
+                    Uri downloadUrl = urlTask.getResult();
+                    sendMessage(downloadUrl.toString(), true);
+
+                    uploadProgress.setVisibility(View.GONE);
+                    selectImageDialog.dismiss();
+
+                    Snackbar snackbar = Snackbar.make(parentLayout, "Success", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    selectImageBtn.setImageResource(R.drawable.gradient_dashboard);
+                    tapToSelectText.setVisibility(View.GONE);
+                    sendImageBtn.setAlpha(1);
+                    sendImageBtn.setEnabled(true);
+                }
+            })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -277,7 +299,9 @@ public class FChatActivity extends AppCompatActivity {
                     });
 
         }
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

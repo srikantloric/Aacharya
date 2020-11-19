@@ -9,10 +9,10 @@
         android:id="@+id/incoming_image_item"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="#9CD3FF"
+        android:background="#2C8AAA"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_marginEnd="50dp"
         android:scaleType="fitCenter"
         android:src="@drawable/logo_aacharya">

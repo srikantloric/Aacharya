@@ -21,7 +21,7 @@ public class PhotoFullScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_full_screen);
         zoomageView = findViewById(R.id.myZoomageView);
-        backBtn = findViewById(R.id.l_one);
+        backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

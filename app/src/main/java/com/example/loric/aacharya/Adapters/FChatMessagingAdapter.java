@@ -1,5 +1,6 @@
 package com.example.loric.aacharya.Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.loric.aacharya.EventGallery.PhotoFullScreenActivity;
 import com.example.loric.aacharya.Models.FChatMessageModel;
 import com.example.loric.aacharya.R;
 
@@ -144,6 +146,7 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             super(itemView);
             image = itemView.findViewById(R.id.incoming_image_item);
             time = itemView.findViewById(R.id.incoming_time_tv);
+
         }
 
         private void setIncomingImageData(String imageUrl, Date date) {
@@ -153,6 +156,15 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             if (date != null) {
                 time.setText(df.format(date));
             }
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                 public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), PhotoFullScreenActivity.class);
+
+                    intent.putExtra("IMAGE_URL", imageUrl);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
 
         }
@@ -175,6 +187,16 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
             if (dateTime != null) {
                 time.setText(df.format(dateTime));
             }
+
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), PhotoFullScreenActivity.class);
+
+                    intent.putExtra("IMAGE_URL", imageUrl);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
 
     }
