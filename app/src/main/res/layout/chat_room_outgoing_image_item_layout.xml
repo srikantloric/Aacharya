@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="end"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sender_image"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/director_sample">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/sender_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/sender_image"
+        android:text="Jhon Doe"></TextView>
+
+
+    <ImageView
+        android:id="@+id/outgoing_image_item"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@id/sender_image"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:background="#505353"
+        android:scaleType="center"
+        android:src="@drawable/logo_aacharya">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/outgoing_image_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outgoing_image_item"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="05:03pm"
+        android:textSize="9sp"
+
+        ></TextView>
+
+</RelativeLayout>

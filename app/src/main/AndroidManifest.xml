@@ -4,10 +4,10 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,7 @@
         android:roundIcon="@drawable/logo_aacharya2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PublicChatRoom"></activity>
         <activity android:name=".PDFViewerActivity" />
         <activity android:name=".StudentsDashboard.RecievePaymentActivity" />
         <activity android:name=".StudentsDashboard.StudentsNotesActivity" />

@@ -1,7 +1,6 @@
 package com.example.loric.aacharya.Adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +61,7 @@ public class FacultyChatUserListAdapter extends RecyclerView.Adapter<FacultyChat
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("lol", "onClick: clicled");
                     Intent intent = new Intent(itemView.getContext(), FChatActivity.class);
-
                     intent.putExtra("USER_NAME", facultyChatUserModelList.get(getAdapterPosition()).getUserName());
                     intent.putExtra("USER_ID", facultyChatUserModelList.get(getAdapterPosition()).getUserId());
                     intent.putExtra("USER_PROFILE", facultyChatUserModelList.get(getAdapterPosition()).getUserProfile());

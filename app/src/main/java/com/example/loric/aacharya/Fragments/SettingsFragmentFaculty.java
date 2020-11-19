@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -32,7 +33,7 @@ public class SettingsFragmentFaculty extends Fragment {
     private Dialog dialog;
 
     private Button logOutBtn;
-
+    private CardView nameContainer, addressContainer;
     public SettingsFragmentFaculty() {
         // Required empty public constructor
     }
@@ -50,6 +51,19 @@ public class SettingsFragmentFaculty extends Fragment {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.loading_dialog_layout);
         dialog.setCancelable(false);
+
+
+        nameContainer = view.findViewById(R.id.name_container);
+        addressContainer = view.findViewById(R.id.address_container);
+
+
+        nameContainer.animate().translationY(-500);
+        addressContainer.animate().translationY(-500);
+        logOutBtn.animate().translationY(500);
+
+
+
+
         setData();
 
         return view;
@@ -81,6 +95,13 @@ public class SettingsFragmentFaculty extends Fragment {
                         } else {
                             Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
+
+                        nameContainer.setVisibility(View.VISIBLE);
+                        addressContainer.setVisibility(View.VISIBLE);
+                        logOutBtn.setVisibility(View.VISIBLE);
+                        nameContainer.animate().translationY(0);
+                        addressContainer.animate().translationY(0);
+                        logOutBtn.animate().translationY(0);
                         dialog.dismiss();
 
                     }

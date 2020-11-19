@@ -49,6 +49,8 @@ public class FacultyAttendanceActivity extends AppCompatActivity {
     private SimpleArcLoader loader;
     private Dialog dialog;
 
+    private ImageView backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +68,20 @@ public class FacultyAttendanceActivity extends AppCompatActivity {
         calLeftBtn = findViewById(R.id.calander_left_btn);
         calRightBtn = findViewById(R.id.calender_right_btn);
         loader = findViewById(R.id.loader);
+        backBtn = findViewById(R.id.back_btn);
         pieChart = findViewById(R.id.piechart);
         presentedTv = findViewById(R.id.presented_tv);
         totalClassesTv = findViewById(R.id.total_classes);
         absentedTv = findViewById(R.id.total_absented_days);
         compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
         compactCalendarView.shouldSelectFirstDayOfMonthOnScroll(false);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {

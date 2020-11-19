@@ -181,13 +181,13 @@ public class HomeFragmentFaculty extends Fragment {
                             String profileImageUrl = task.getResult().getString("userProfile");
                             imageUrl = task.getResult().getString("userProfile");
                             teacherName = task.getResult().getString("userName");
-                            teacherSubject = task.getResult().getString("faculty_subject");
+                            teacherSubject = task.getResult().getString("userSubject");
                             if (circleImageView != null && isAdded()) {
 
                                 Glide.with(getContext()).load(profileImageUrl).into(circleImageView);
                             }
                             facultyName.setText(task.getResult().getString("userName"));
-                            facultySubject.setText("( " + task.getResult().getString("faculty_subject") + " )");
+                            facultySubject.setText("( " + task.getResult().getString("userSubject") + " )");
                         } else {
                             facultySubject.setVisibility(View.GONE);
                             facultyName.setVisibility(View.GONE);

@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+        app:layout_constraintTop_toBottomOf="@+id/grp_discussion_fchat_btn" />
 
     <TextView
         android:id="@+id/textView13"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView8"
+        android:id="@+id/grp_discussion_fchat_btn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"

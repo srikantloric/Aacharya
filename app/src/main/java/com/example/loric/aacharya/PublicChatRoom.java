@@ -1,4 +1,4 @@
-package com.example.loric.aacharya.StudentsDashboard;
+package com.example.loric.aacharya;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -22,11 +22,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.loric.aacharya.Adapters.FChatMessagingAdapter;
-import com.example.loric.aacharya.ImageResizer;
-import com.example.loric.aacharya.Models.FChatMessageModel;
-import com.example.loric.aacharya.R;
+import com.example.loric.aacharya.Adapters.PublicChatRoomAdapter;
+import com.example.loric.aacharya.Models.ChatRoomModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,19 +50,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class FChatActivity extends AppCompatActivity {
-
+public class PublicChatRoom extends AppCompatActivity {
+    List<ChatRoomModel> chatRoomModelList = new ArrayList<>();
     private ImageView backBtn;
-    private CircleImageView circleImageView;
-    private TextView userName;
-    private String USER_NAME, USER_PROFILE, USER_ID;
     private RecyclerView recyclerView;
-    private FChatMessagingAdapter adapter;
+    private PublicChatRoomAdapter adapter;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    private List<FChatMessageModel> fChatMessageModelList = new ArrayList<>();
     private EditText messageEditText;
     private ImageView sentBtn, attachBtn;
     private ConstraintLayout parentLayout;
@@ -75,16 +67,19 @@ public class FChatActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
     private ProgressBar uploadProgress;
     private Dialog selectImageDialog;
-
+    private String USER_NAME = "";
+    private String USER_IMAGE = "";
+    private Dialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_f_chat);
+        setContentView(R.layout.activity_public_chat_room);
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
+        /////Image Picker Dialog//////
         selectImageDialog = new Dialog(this);
         selectImageDialog.setContentView(R.layout.image_picker_dialog_layout);
         selectImageDialog.setCancelable(true);
@@ -92,18 +87,27 @@ public class FChatActivity extends AppCompatActivity {
         sendImageBtn = selectImageDialog.findViewById(R.id.send_btn);
         uploadProgress = selectImageDialog.findViewById(R.id.upload_progress);
         tapToSelectText = selectImageDialog.findViewById(R.id.tap_to_select);
+        /////Image Picker Dialog//////
 
 
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.loading_dialog_layout);
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
 
+        if (USER_IMAGE == "" && USER_NAME == "") {
+            CurrentUserData();
+        } else {
+            loadingDialog.dismiss();
+        }
         initView();
         setHeader();
-        chatHandler();
         loadMessages();
         sentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(messageEditText.getText())) {
-                    Toast.makeText(FChatActivity.this, "Cannot sent empty text..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PublicChatRoom.this, "Cannot sent empty text..", Toast.LENGTH_SHORT).show();
                 } else {
                     sendMessage(messageEditText.getText().toString(), false);
                     messageEditText.setText("");
@@ -112,25 +116,35 @@ public class FChatActivity extends AppCompatActivity {
         });
     }
 
-    private String setChatNode(String S_UID, String R_UID) {
-        String finalNodeId = null;
-        if (S_UID.compareTo(R_UID) < 1) {
-            finalNodeId = S_UID + R_UID;
-        } else if (R_UID.compareTo(S_UID) < 1) {
-            finalNodeId = R_UID + S_UID;
-        }
-        return finalNodeId;
+    private void CurrentUserData() {
+        firebaseFirestore.collection("USERS")
+                .document(firebaseAuth.getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            USER_NAME = task.getResult().getString("userName");
+                            USER_IMAGE = task.getResult().getString("userProfile");
+                        } else {
+                            Toast.makeText(PublicChatRoom.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        loadingDialog.dismiss();
+                    }
+                });
+
     }
 
     private void sendMessage(String messageEditText, boolean isImage) {
         Map<String, Object> message = new HashMap<>();
         message.put("messageText", messageEditText);
         message.put("sender", firebaseAuth.getCurrentUser().getUid());
-        message.put("receiver", USER_ID);
         message.put("sentAt", FieldValue.serverTimestamp());
         message.put("isImage", isImage);
+        message.put("sender_image", USER_IMAGE);
+        message.put("sender_name", USER_NAME);
         firebaseFirestore.collection("MESSAGE")
-                .document(setChatNode(firebaseAuth.getCurrentUser().getUid(), USER_ID))
+                .document("PUBLIC_CHAT_ROOM")
                 .collection("messages")
                 .document()
                 .set(message);
@@ -139,73 +153,82 @@ public class FChatActivity extends AppCompatActivity {
     }
 
     private void loadMessages() {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        adapter = new PublicChatRoomAdapter(chatRoomModelList);
+        recyclerView.setAdapter(adapter);
         firebaseFirestore.collection("MESSAGE")
-                .document(setChatNode(firebaseAuth.getCurrentUser().getUid(), USER_ID))
+                .document("PUBLIC_CHAT_ROOM")
                 .collection("messages")
                 .orderBy("sentAt", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        chatRoomModelList.clear();
                         if (value.getDocuments() != null) {
-                            fChatMessageModelList.clear();
                             for (DocumentSnapshot snapshot : value.getDocuments()) {
 
                                 if (snapshot.getString("sender").equals(firebaseAuth.getCurrentUser().getUid())) {
                                     if (snapshot.getBoolean("isImage")) {
-                                        fChatMessageModelList.add(new FChatMessageModel(3, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                        chatRoomModelList.add(new ChatRoomModel(3,
+                                                snapshot.getString("messageText"),
+                                                snapshot.getDate("sentAt"),
+                                                snapshot.getString("sender_name"),
+                                                snapshot.getString("sender_image")
+                                        ));
                                     } else {
-                                        fChatMessageModelList.add(new FChatMessageModel(1, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                        chatRoomModelList.add(new ChatRoomModel(1,
+                                                snapshot.getString("messageText"),
+                                                snapshot.getDate("sentAt"),
+                                                snapshot.getString("sender_name"),
+                                                snapshot.getString("sender_image")
+                                        ));
                                     }
                                 } else {
                                     if (snapshot.getBoolean("isImage")) {
-                                        fChatMessageModelList.add(new FChatMessageModel(2, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                        chatRoomModelList.add(new ChatRoomModel(2,
+                                                snapshot.getString("messageText"),
+                                                snapshot.getDate("sentAt"),
+                                                snapshot.getString("sender_name"),
+                                                snapshot.getString("sender_image")
+                                        ));
                                     } else {
-                                        fChatMessageModelList.add(new FChatMessageModel(0, snapshot.getString("messageText"), snapshot.getDate("sentAt")));
+                                        chatRoomModelList.add(new ChatRoomModel(0,
+                                                snapshot.getString("messageText"),
+                                                snapshot.getDate("sentAt"),
+                                                snapshot.getString("sender_name"),
+                                                snapshot.getString("sender_image")
+                                        ));
                                     }
                                 }
                             }
                             adapter.notifyDataSetChanged();
+
                         } else {
-                            Toast.makeText(FChatActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PublicChatRoom.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    private void chatHandler() {
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,true);
-        recyclerView.setLayoutManager(mLayoutManager);
-        adapter = new FChatMessagingAdapter(fChatMessageModelList);
-        recyclerView.setAdapter(adapter);
-
-
-    }
-
     private void setHeader() {
-        USER_NAME = getIntent().getStringExtra("USER_NAME");
-        USER_PROFILE = getIntent().getStringExtra("USER_PROFILE");
-        USER_ID = getIntent().getStringExtra("USER_ID");
-        Glide.with(this).load(USER_PROFILE).into(circleImageView);
-        userName.setText(USER_NAME);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
     }
+
 
     private void initView() {
         backBtn = findViewById(R.id.back_btn_fchat);
-        circleImageView = findViewById(R.id.user_profile_view);
-        userName = findViewById(R.id.user_name);
-        recyclerView = findViewById(R.id.rv_fchat);
-        sentBtn = findViewById(R.id.sentBtn);
-        messageEditText = findViewById(R.id.messageInput);
-        attachBtn = findViewById(R.id.attach_btn);
+        recyclerView = findViewById(R.id.rv_fchat_gd);
+        sentBtn = findViewById(R.id.sentBtnGd);
+        messageEditText = findViewById(R.id.messageInputGd);
+        attachBtn = findViewById(R.id.attach_btn_gd);
         parentLayout = findViewById(R.id.parent_layout);
-
 
 
         attachBtn.setOnClickListener(new View.OnClickListener() {
@@ -284,7 +307,7 @@ public class FChatActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(FChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PublicChatRoom.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -300,7 +323,6 @@ public class FChatActivity extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

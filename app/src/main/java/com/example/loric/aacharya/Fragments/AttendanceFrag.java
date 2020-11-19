@@ -53,6 +53,8 @@ public class AttendanceFrag extends Fragment {
     private Dialog dialog;
 
 
+
+
     public AttendanceFrag() {
         // Required empty public constructor
     }

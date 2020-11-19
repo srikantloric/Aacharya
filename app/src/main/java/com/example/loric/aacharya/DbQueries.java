@@ -27,7 +27,6 @@ public class DbQueries {
     final static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     final static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     public static ListenerRegistration listenerRegistration;
-
     public static boolean isQrScannedAndMatched = false;
 
 

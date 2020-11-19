@@ -148,7 +148,7 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
         sliderView.setIndicatorSelectedColor(Color.WHITE);
-        sliderView.setIndicatorUnselectedColor(Color.parseColor("#0D63FF"));
+        sliderView.setIndicatorUnselectedColor(Color.parseColor("#A9A9A9"));
 
         ////Image Slider//
 
