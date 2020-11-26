@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,9 @@ public class CourseOfferedActivity extends AppCompatActivity {
     private ImageView dhamakaView;
     private TextView registrationFee, oneInstallmentPayment, twoInstallmentPayment, monthlyPayment;
 
+    private CardView feeStructureLayout;
+    private ImageView backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,15 @@ public class CourseOfferedActivity extends AppCompatActivity {
         oneInstallmentPayment = findViewById(R.id.onetime_payment_tv);
         twoInstallmentPayment = findViewById(R.id.two_installment_tv);
         monthlyPayment = findViewById(R.id.monthly_payment_tv);
+        feeStructureLayout = findViewById(R.id.fee_structure_layout);
+        backBtn = findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        feeStructureLayout.animate().translationY(500);
 
 
         recyclerView.setHasFixedSize(true);
@@ -96,6 +109,8 @@ public class CourseOfferedActivity extends AppCompatActivity {
                             Toast.makeText(CourseOfferedActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         loading.dismiss();
+                        feeStructureLayout.setVisibility(View.VISIBLE);
+                        feeStructureLayout.animate().translationY(0);
                     }
                 });
 

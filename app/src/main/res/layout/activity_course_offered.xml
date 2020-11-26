@@ -17,14 +17,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/l_one"
+            android:id="@+id/back_btn"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:padding="10dp"
             android:src="@drawable/ic_backarraow"></ImageView>
 
         <TextView
-            android:id="@+id/back_btn"
+            android:id="@+id/l_one"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|center_vertical"
@@ -39,17 +39,18 @@
         android:id="@+id/rv_courses_offered"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView4"
+        app:layout_constraintBottom_toTopOf="@+id/fee_structure_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
+        android:id="@+id/fee_structure_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:cardBackgroundColor="#E4F5FD"
-        app:cardElevation="8dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

@@ -121,10 +121,24 @@ public class SettingsFragmentFaculty extends Fragment {
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
-                Intent intent = new Intent(getContext(), DashboardPublic.class);
-                startActivity(intent);
-                getActivity().finish();
+
+                firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .update("isLoggedIn", false)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    firebaseAuth.signOut();
+                                    Intent intent = new Intent(getContext(), DashboardPublic.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
             }
         });
 

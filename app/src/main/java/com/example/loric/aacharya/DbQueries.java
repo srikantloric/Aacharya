@@ -29,9 +29,7 @@ public class DbQueries {
     public static ListenerRegistration listenerRegistration;
     public static boolean isQrScannedAndMatched = false;
 
-
-
-
+    public static boolean isNoticeCancelled =false;
 
     public static void setChatUserListForFaculty(final Context context, boolean removeListener, final Dialog loading) {
         if (removeListener) {

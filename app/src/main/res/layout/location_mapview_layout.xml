@@ -22,13 +22,15 @@
     <ImageView
         android:id="@+id/map_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:backgroundTint="@color/colorWhite"
+        android:scaleType="centerCrop"
         android:foreground="?selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/institute_map" />
+        app:srcCompat="@drawable/aacharya_map" />
 
 
     <TextView
@@ -59,8 +61,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyamebum. Stet cccusam et
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+        android:text="Aacharya Institute was established by Sudeep Chaudhary in 2008, this institute has given more than thousands of results so far. Along with this, this institute has been doing many social work such as teaching poor students, providing scholarships and organizing blood donation camps."
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"

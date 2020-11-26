@@ -2,13 +2,13 @@ package com.example.loric.aacharya.Adapters;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.loric.aacharya.Models.ImageSliderModel;
 import com.example.loric.aacharya.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
@@ -53,8 +53,7 @@ public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.Sli
         }
 
         private void setData(String imageUrl) {
-            Log.d("pop", "setData: "+imageUrl);
-            Glide.with(itemView.getContext()).load(imageUrl).into(sliderImageView);
+            Glide.with(itemView.getContext()).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.image_placeholder)).centerCrop().into(sliderImageView);
         }
 
     }

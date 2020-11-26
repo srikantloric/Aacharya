@@ -149,7 +149,6 @@ public class FChatActivity extends AppCompatActivity {
                         if (value.getDocuments() != null) {
                             fChatMessageModelList.clear();
                             for (DocumentSnapshot snapshot : value.getDocuments()) {
-
                                 if (snapshot.getString("sender").equals(firebaseAuth.getCurrentUser().getUid())) {
                                     if (snapshot.getBoolean("isImage")) {
                                         fChatMessageModelList.add(new FChatMessageModel(3, snapshot.getString("messageText"), snapshot.getDate("sentAt")));

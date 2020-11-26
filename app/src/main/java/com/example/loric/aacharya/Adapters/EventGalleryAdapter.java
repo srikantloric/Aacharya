@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.loric.aacharya.EventGallery.PhotoFullScreenActivity;
 import com.example.loric.aacharya.Models.EventGalleryModel;
 import com.example.loric.aacharya.R;
@@ -89,7 +90,8 @@ public class EventGalleryAdapter extends RecyclerView.Adapter {
         }
 
         public void setImageView(String imageUri) {
-            Glide.with(itemView.getContext()).load(imageUri).into(imageView);
+
+            Glide.with(itemView.getContext()).load(imageUri).apply(new RequestOptions().placeholder(R.drawable.loading_image_placeholder)).centerCrop().into(imageView);
         }
     }
     class TitleLayout extends RecyclerView.ViewHolder {

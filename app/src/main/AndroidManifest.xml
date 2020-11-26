@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/logo_aacharya2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PublicChatRoom"></activity>
+        <activity android:name=".StudentsDashboard.VacancyActivity"></activity>
+        <activity android:name=".PublicChatRoom" />
         <activity android:name=".PDFViewerActivity" />
         <activity android:name=".StudentsDashboard.RecievePaymentActivity" />
         <activity android:name=".StudentsDashboard.StudentsNotesActivity" />
@@ -59,7 +60,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_8ARVWoFieTdo6V" />
+            android:value="rzp_live_BaDEhHOgecsLKP" />
     </application>
 
 </manifest>

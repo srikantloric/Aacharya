@@ -3,7 +3,6 @@ package com.example.loric.aacharya.StudentsDashboard;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -67,6 +66,8 @@ public class RecievePaymentActivity extends AppCompatActivity implements Payment
 
     public void startPayment() {
 
+        Integer amountPayout = Integer.parseInt(bookPrice)*100;
+
         Checkout checkout = new Checkout();
         checkout.setImage(R.drawable.logo_aacharya);
         final Activity activity = this;
@@ -79,19 +80,18 @@ public class RecievePaymentActivity extends AppCompatActivity implements Payment
 
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
-            options.put("amount", "100");//pass amount in currency subunits
-//            options.put("prefill.email", "srikantloric@gmail.com");
-//            options.put("prefill.contact", "7979080633");
+            options.put("amount", ""+amountPayout);//pass amount in currency subunits
+            options.put("prefill.email", "loric.aacharya@gmail.com");
+            options.put("prefill.contact", "7808722222");
             checkout.open(activity, options);
         } catch (Exception e) {
-            Log.e("lol", "Error in starting Razorpay Checkout", e);
+            Toast.makeText(activity, "Error in starting Razorpay Checkout", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     @Override
     public void onPaymentSuccess(String s) {
-        Log.d("lol", "onPaymentSuccess: " + DOCUMENT_ID);
         firebaseFirestore.collection("BOOKS_NOTES").document(DOCUMENT_ID)
                 .update("allowed_users", FieldValue.arrayUnion(mAuth.getCurrentUser().getUid()))
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

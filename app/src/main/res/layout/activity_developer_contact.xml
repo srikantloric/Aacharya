@@ -56,7 +56,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorPrimaryDark"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="Loric Softwares"
         android:textAlignment="center"
         android:textColor="#fff"
@@ -72,11 +72,12 @@
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_baseline_contact_mail_24"
         android:drawablePadding="10dp"
-        android:text="Email : srikantloric@gmail.com "
+        android:text="Email : info@loricsoftwares.com"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/website_developer" />
 
     <TextView
         android:id="@+id/textView38"
@@ -87,9 +88,27 @@
         android:drawablePadding="10dp"
         android:text="Phone : +917979080633"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
         app:layout_constraintStart_toStartOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/website_developer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#569AC5"
+        android:foreground="?selectableItemBackground"
+        android:padding="10dp"
+        android:text="www.loricsoftwares.com"
+        android:textAlignment="center"
+        android:textColor="#FAFAFA"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

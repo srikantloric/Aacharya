@@ -48,6 +48,20 @@ public class PDFViewerActivity extends AppCompatActivity {
         titleHeader.setText(TITLE);
         new RetrivePdfStream().execute(BOOK_URL);
 
+
+    }
+
+    private void delayMaker() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (pdfView.getPageCount() != 0) {
+                    loader.setVisibility(View.GONE);
+                } else {
+                    delayMaker();
+                }
+            }
+        }, 1000);
     }
 
     class RetrivePdfStream extends AsyncTask<String, Void, InputStream> {
@@ -72,13 +86,8 @@ public class PDFViewerActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(InputStream inputStream) {
             pdfView.fromStream(inputStream).load();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loader.setVisibility(View.GONE);
-
-                }
-            }, 1000);
+            delayMaker();
         }
     }
+
 }

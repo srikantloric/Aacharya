@@ -6,6 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFrag">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/notice_card"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:minHeight="300dp"
+        android:visibility="gone"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@drawable/notice_icon"
+                android:text="NOTICE BOARD"
+                android:textColor="#01579B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/notice_cancel_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/notice_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="0dp"
@@ -20,31 +78,34 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/f_circleImageView"
+                android:id="@+id/s_circleImageView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
                 android:src="@drawable/director_sample"
+                android:visibility="gone"
                 app:civ_border_color="@color/colorWhite"
                 app:civ_border_width="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
 
             <TextView
-                android:id="@+id/faculty_name_tv"
+                android:id="@+id/student_name_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Jhon Doe"
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp"
+                android:elevation="5dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/f_circleImageView"
-                app:layout_constraintTop_toTopOf="@+id/f_circleImageView" />
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/s_circleImageView"
+                app:layout_constraintTop_toTopOf="@+id/s_circleImageView" />
 
             <TextView
-                android:id="@+id/faculty_subject"
+                android:id="@+id/student_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -52,23 +113,24 @@
                 android:text="Roll no : 2565554"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/f_circleImageView"
-                app:layout_constraintStart_toEndOf="@+id/f_circleImageView"
-                app:layout_constraintTop_toBottomOf="@+id/faculty_name_tv" />
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/s_circleImageView"
+                app:layout_constraintStart_toEndOf="@+id/s_circleImageView"
+                app:layout_constraintTop_toBottomOf="@+id/student_name_tv" />
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="Dashboard"
+                android:alpha="0.5"
                 android:textColor="#00BCD4"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/notification_btn"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/faculty_name_tv"
+                app:layout_constraintStart_toEndOf="@+id/student_name_tv"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -88,6 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
+                android:alpha="0.8"
+                android:textColor="#fff"
                 android:text="Scan to register your attendance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -108,6 +172,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
+            <ImageView
+                android:id="@+id/notification_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:foreground="?selectableItemBackground"
+                android:src="@drawable/notice_icon"
+                android:tint="#fff"
+                app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>

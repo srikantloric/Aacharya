@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.loric.aacharya.Models.FacultyListModel;
 import com.example.loric.aacharya.R;
 
@@ -109,7 +110,7 @@ public class FacultyListAdapter extends RecyclerView.Adapter {
 
         private void setFacultyDetail(String imageUrl, String name) {
             facultyName.setText(name);
-            Glide.with(itemView.getContext()).load(imageUrl).into(facultyImage);
+            Glide.with(itemView.getContext()).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.image_placeholder)).centerCrop().into(facultyImage);
         }
     }
 

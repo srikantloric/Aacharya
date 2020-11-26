@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.loric.aacharya.EventGallery.PhotoFullScreenActivity;
 import com.example.loric.aacharya.Models.FChatMessageModel;
 import com.example.loric.aacharya.R;
@@ -150,7 +151,7 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
         }
 
         private void setIncomingImageData(String imageUrl, Date date) {
-            Glide.with(itemView.getContext()).load(imageUrl).into(image);
+            Glide.with(itemView.getContext()).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.image_placeholder)).centerCrop().into(image);
             SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
 
             if (date != null) {
@@ -181,7 +182,7 @@ public class FChatMessagingAdapter extends RecyclerView.Adapter {
         }
 
         private void setOutgoingImageData(String imageUrl, Date dateTime) {
-            Glide.with(itemView.getContext()).load(imageUrl).into(image);
+            Glide.with(itemView.getContext()).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.image_placeholder)).centerCrop().into(image);
 
             SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
             if (dateTime != null) {

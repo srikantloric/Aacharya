@@ -62,7 +62,7 @@
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+917979908063"
+            android:text="+917808722222"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+919931085816"
+            android:text="+916204219627"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
     </LinearLayout>

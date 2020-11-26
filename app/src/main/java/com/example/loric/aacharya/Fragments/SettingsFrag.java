@@ -35,6 +35,7 @@ public class SettingsFrag extends Fragment {
     private Dialog dialog;
     private CardView nameContainer, addressContainer;
 
+
     public SettingsFrag() {
         // Required empty public constructor
     }
@@ -62,7 +63,6 @@ public class SettingsFrag extends Fragment {
         nameContainer = view.findViewById(R.id.name_container);
         addressContainer = view.findViewById(R.id.address_container);
 
-
         nameContainer.animate().translationY(-500);
         addressContainer.animate().translationY(-500);
         logOutBtn.animate().translationY(500);
@@ -76,10 +76,21 @@ public class SettingsFrag extends Fragment {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                FirebaseAuth.getInstance().signOut();
-                                Intent intent = new Intent(getContext(), DashboardPublic.class);
-                                startActivity(intent);
-                                getActivity().finish();
+                                firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .update("isLoggedIn", false)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    FirebaseAuth.getInstance().signOut();
+                                                    Intent intent = new Intent(getContext(), DashboardPublic.class);
+                                                    startActivity(intent);
+                                                    getActivity().finish();
+                                                } else {
+                                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

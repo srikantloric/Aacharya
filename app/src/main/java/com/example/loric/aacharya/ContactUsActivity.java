@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat;
 public class ContactUsActivity extends AppCompatActivity {
 
     private static final int REQUEST_PHONE_CALL = 001;
-    ImageView callBtn1, callBtn2;
+    private ImageView callBtn1, callBtn2,backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +22,24 @@ public class ContactUsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_us);
         callBtn1 = findViewById(R.id.call_btn_1);
         callBtn2 = findViewById(R.id.call_btn_2);
+        backBtn = findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         callBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               callContact("+917979080633");
+               callContact("+917808722222");
             }
         });
         callBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               callContact("+917979080654");
+               callContact("+916204219627");
             }
         });
     }

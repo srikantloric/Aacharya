@@ -75,6 +75,7 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardPublic.this, LoginActivity.class);
+                intent.putExtra("TITLE_USER","Student login");
                 startActivity(intent);
 
 
@@ -83,7 +84,7 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
         mapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=24.396274,86.286126");
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=24.193714,86.307844");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
@@ -277,6 +278,7 @@ public class DashboardPublic extends AppCompatActivity implements NavigationView
         switch (item.getItemId()) {
             case R.id.nav_login:
                 Intent intent = new Intent(DashboardPublic.this,LoginActivity.class);
+                intent.putExtra("TITLE_USER","Faculty login");
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
